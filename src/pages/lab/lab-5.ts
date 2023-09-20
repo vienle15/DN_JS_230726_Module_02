@@ -1,133 +1,107 @@
-// // function handleCRUD(): void {
-// //   const selected = prompt("chọn C/R/U/D");
+class Employee {
+  readonly id: string;
+  private salary: number;
 
-// //   switch (selected) {
-// //     case "C":
-// //       break;
-// //     case "R":
-// //       break;
-// //     case "U":
-// //       break;
-// //     case "D":
-// //       break;
-// //     default:
-// //       alert("chọn đúng C/R/U/D");
-// //   }
-// // }
+  constructor(
+    id: string,
+    private name: string,
+    private age: number,
+    private gender: boolean,
+    private scale: number
+  ) {
+    this.name = name;
+    this.age = age;
+    this.id = id;
+    this.gender = gender;
+    this.scale = scale;
+    this.salary = this.scale * 1300000;
+  }
 
-// class Employee {
-//   public id: number;
-//   public name: string;
-//   public age: number;
-//   public gender: string;
-//   public rate: number;
-//   public salary: number;
+  get getSalary(): number {
+    return this.salary;
+  }
 
-//   constructor(
-//     id: number,
-//     name: string,
-//     age: number,
-//     gender: string,
-//     rate: number,
-//     salary: number
-//   ) {
-//     this.id = id;
-//     this.name = name;
-//     this.age = age;
-//     this.gender = gender;
-//     this.rate = rate;
-//     this.salary = salary;
-//   }
+  get getInfo(): {
+    name: string;
+    id: string;
+    age: number;
+    gender: boolean;
+    salary: number;
+    scale: number;
+  } {
+    return {
+      name: this.name,
+      id: this.id,
+      age: this.age,
+      scale: this.scale,
+      gender: this.gender,
+      salary: this.getSalary,
+    };
+  }
+}
 
-//   getId(): number {
-//     return this.id;
-//   }
+type STAFF = {
+  name: string;
+  id: string;
+  age: number;
+  gender: boolean;
+  salary: number;
+  scale: number;
+};
+class Company {
+  private staffs: STAFF[] = [];
 
-//   getName(): string {
-//     return this.name;
-//   }
+  addStaff(staff: STAFF) {
+    this.staffs.push(staff);
+  }
 
-//   setName(name: string) {
-//     this.name = name;
-//   }
+  deleteStaff(id: string) {
+    const index = this.staffs.findIndex((staff) => staff.id === id);
+    this.staffs.splice(index, 1);
+  }
+  readStaff() {
+    this.staffs.forEach((staff) => {
+      console.log(staff);
+    });
+  }
+  updateStaff(newStaff: STAFF) {
+    const index = this.staffs.findIndex((staff) => staff.id === newStaff.id);
+    this.staffs.splice(index, 1, newStaff);
+  }
 
-//   getAge(): number {
-//     return this.age;
-//   }
+  getStaff(id: string) {
+    const staff = this.staffs.find((staff) => staff.id === id);
+    return staff;
+  }
+}
 
-//   setAge(age: number) {
-//     this.age = age;
-//   }
+const employee_1 = new Employee("ST_1", "Nguyen Van A", 25, true, 1.5);
+const employee_2 = new Employee("ST_2", "Nguyen Van B", 25, true, 1.5);
 
-//   getGender(): string {
-//     return this.gender;
-//   }
+const employee_3 = new Employee("ST_3", "Nguyen Van C", 25, true, 1.5);
 
-//   setGender(gender: string) {
-//     this.gender = gender;
-//   }
+const myComPany = new Company();
+myComPany.addStaff(employee_1.getInfo);
+myComPany.addStaff(employee_2.getInfo);
+myComPany.addStaff(employee_3.getInfo);
 
-//   getRate(): number {
-//     return this.rate;
-//   }
+console.log("Kiem tra nhan vien cong ty", myComPany.readStaff());
 
-//   setRate(rate: number) {
-//     this.rate = rate;
-//   }
+myComPany.deleteStaff("ST_2");
+console.log("Kiem tra nhan vien cong ty xoa", myComPany.readStaff());
 
-//   getSalary(): number {
-//     return this.salary;
-//   }
+function editStaff() {
+  const newData = {
+    id: "ST_3",
+    scale: 21,
+  };
+  const staff = myComPany.getStaff("ST_3");
+  if (staff) {
+    const newStaff = { ...staff, ...newData };
+    myComPany.updateStaff(newStaff);
+  }
 
-//   setSalary(salary: number) {
-//     this.salary = salary;
-//   }
-// }
+  console.log("Kiem tra nhan vien cong ty edit", myComPany.readStaff());
+}
 
-// class Company {
-//   public companyName: string;
-
-//   constructor(companyName: string) {
-//     this.companyName = companyName;
-//   }
-
-//   company() {
-//     const employees: Employee[] = [
-//       new Employee(1, "Trần Hạo Nam", 25, "Nam", 5, 1),
-//       new Employee(2, "Triệu Sơn Hà", 23, "Nam", 5, 2),
-//       new Employee(3, "Nguyễn Văn Tèo", 28, "Nam", 5, 3),
-//       new Employee(4, "Nguyễn Văn Teo", 30, "Nam", 5, 4),
-//       new Employee(5, "Đinh Thị Tẻo", 27, "Nữ", 5, 5),
-//     ];
-
-//     for (const employee of employees) {
-//       employee.salary = Number(employee.rate) * 1300000;
-//     }
-
-//     console.log("Danh sách nhân viên công ty", this.companyName);
-//     for (const employee of employees) {
-//       console.log(
-//         "Mã: ",
-//         employee.id,
-//         ";",
-//         "Tên: ",
-//         employee.name,
-//         ";",
-//         "Tuổi: ",
-//         employee.age,
-//         ";",
-//         "Giới tính : ",
-//         employee.gender,
-//         ";",
-//         "Hệ số Lương: ",
-//         employee.rate,
-//         ";",
-//         "Mức lương: ",
-//         employee.salary
-//       );
-//     }
-//   }
-// }
-
-// const company = new Company("RA");
-// company.company();
+editStaff();

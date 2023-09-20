@@ -1,41 +1,47 @@
 "use strict";
 class Fan {
-    constructor(speed, status, color, radius) {
+    constructor(color, radius, status = false, speed = 1) {
+        this.color = color;
+        this.radius = radius;
+        this.status = status;
+        this.speed = speed;
         this.SLOW = 1;
         this.MEDIUM = 2;
         this.FAST = 3;
-        this.speed = speed;
         this.status = status;
+        this.speed = speed;
         this.color = color;
         this.radius = radius;
     }
-    getSpeed() {
+    get getSpeed() {
         switch (this.speed) {
             case this.FAST:
                 return "fast";
+            case this.MEDIUM:
+                return "medium";
+            default:
+                return "slow";
         }
     }
-    setSpeed(speed) {
+    set setSpeed(speed) {
         this.speed = speed;
     }
-    getStatus() {
-        return this.status;
+    get getStatus() {
+        return this.status ? "fan is on" : "fan is off";
     }
-    setStatus(status) {
+    set setStatus(status) {
         this.status = status;
     }
-    getColor() {
-        return this.color;
-    }
-    getRadius() {
-        return this.radius;
-    }
-    getInfo(speed, status, color, radius) {
+    get getInfo() {
         return {
-            speed: this.speed,
-            status: this.status,
+            stauts: this.getStatus,
             radius: this.radius,
             color: this.color,
+            speed: this.getSpeed,
         };
     }
 }
+const fan_1 = new Fan("yellow", 10, true, 3);
+const fan_2 = new Fan("blue", 10);
+console.log("Thông tin của quạt", fan_1.getInfo);
+console.log("Thông tin của quạt 2", fan_2.getInfo);

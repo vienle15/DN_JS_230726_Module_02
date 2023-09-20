@@ -1,89 +1,85 @@
 function handleCRUD(): void {
-  const selected = prompt("chọn C/R/U/D");
+  const selected = prompt("Chọn  C/R/U/D");
   const myClass = new ClassRoom();
+
   switch (selected) {
     case "C":
-      myClass.addStudent(new Student("A", "AAA", 20, false, "DN", 999999999));
+      myClass.addStudent(student_1);
       break;
     case "R":
       break;
     case "U":
+      const newData = { name: "B", id: "SV01" };
+      myClass.updateStudent(newData);
       break;
     case "D":
+      myClass.deleteStudent("SV01");
       break;
+
     default:
-      alert("chọn đúng C/R/U/D");
+      alert("Chọn đúng C/R/U/D");
+      break;
   }
 }
 
 class Student {
-  readonly id;
-  private name;
-  private age;
-  private gender;
-  private address;
-  private phone;
-  constructor(
-    id: string,
-    name: string,
-    age: number,
-    gender: boolean,
-    address: string,
-    phone: number
-  ) {
-    id = this.id;
-    name = this.name;
-    age = this.age;
-    gender = this.gender;
-    address = this.address;
-    phone = this.phone;
+  readonly id: string;
+  private name: string;
+  private age: number;
+  constructor(name: string, age: number, id: string) {
+    this.name = name;
+    this.age = age;
+    this.id = id;
   }
-  getInfo(): {
-    id: string;
-    name: string;
-    age: string;
-    gender: boolean;
-    address: string;
-    phone: number;
-  } {
+
+  //   Phương thức
+
+  get getInfo(): { name: string; age: number; id: string } {
     return {
-      id: this.id,
       name: this.name,
       age: this.age,
-      gender: this.gender,
-      address: this.address,
-      phone: this.phone,
+      id: this.id,
     };
   }
-  get getId(): string {
-    return this.id;
-  }
-  get getName(): string {
-    return this.name;
-  }
+
   set setName(name: string) {
     this.name = name;
   }
-  get getAge(): number {
-    return this.age;
-  }
-  get getGender(): boolean {
-    return this.gender;
-  }
-  get getAddress(): string {
-    return this.address;
-  }
-  set setAddress(address: string) {
-    this.address = address;
-  }
-  get getPhone(): number {
-    return this.phone;
-  }
-  set setPhone(phone: number) {
-    this.phone = phone;
+  set setAge(age: number) {
+    this.age = age;
   }
 }
-const student_1 = new Student("abcd1234", "Lele", 20, false, "DN", 999999999);
+
+const student_1 = new Student("A", 20, "SV01");
+
 class ClassRoom {
   private students: Student[] = [];
+
+  //   Phương thức của lớp
+  addStudent(student: Student) {
+    this.students.push(student);
+  }
+
+  deleteStudent(id: string) {
+    const index = this.students.findIndex((student) => student.id === id);
+    this.students.splice(index, 1);
+  }
+  renderStudent() {
+    this.students.forEach((student) => {
+      console.log(student.getInfo);
+    });
+  }
+
+  updateStudent(newData: { id: string; [key: string]: any }) {
+    const newStudents = this.students.map((student) => {
+      if (newData.id == student.id) {
+        const test = { ...student, ...newData };
+        console.log(111, test);
+      }
+      return student;
+    });
+    this.students = newStudents;
+  }
 }
+
+let number: string[] = ["", "2"];

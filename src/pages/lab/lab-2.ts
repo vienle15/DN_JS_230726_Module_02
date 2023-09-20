@@ -1,57 +1,52 @@
 class QuadraticEquation {
-  private a: number;
+  // Thuộc tính
+  //   private a: number;
   private b: number;
   private c: number;
 
-  constructor(a: number, b: number, c: number) {
+  //   hàm tạo
+  constructor(private a: number, b: number, c: number) {
     this.a = a;
     this.b = b;
     this.c = c;
   }
 
-  getA(): number {
-    return this.a;
+  //   Phương thức
+
+  get getDiscriminant() {
+    return this.b ** 2 - 4 * this.a * this.c;
   }
 
-  setA(a: number) {
-    this.a = a;
-  }
+  get getRoot1(): number {
+    const delta = this.getDiscriminant;
 
-  getB(): number {
-    return this.b;
-  }
-
-  setB(b: number) {
-    this.b = b;
-  }
-
-  getC(): number {
-    return this.c;
-  }
-
-  setC(c: number) {
-    this.c = c;
-  }
-  getDiscriminant(): number {
-    return this.b * this.b - 4 * this.a * this.c;
-  }
-  getRoot1(): number {
-    if (this.getDiscriminant() >= 0) {
-      return (-this.b + Math.sqrt(this.getDiscriminant())) / (2 * this.a);
-    } else {
-      return 0;
+    if (delta >= 0) {
+      return (-this.b + Math.sqrt(delta)) / (2 * this.a);
     }
+
+    return 0;
   }
 
-  getRoot2(): number {
-    if (this.getDiscriminant() >= 0) {
-      return (-this.b - Math.sqrt(this.getDiscriminant())) / (2 * this.a);
+  get getRoot2(): number {
+    const delta = this.getDiscriminant;
+    if (delta >= 0) {
+      return (-this.b - Math.sqrt(delta)) / (2 * this.a);
+    }
+    return 0;
+  }
+
+  get calculation(): string {
+    const delta = this.getDiscriminant;
+    if (delta > 0) {
+      return `Phương trình đã cho có 2 nghiệm x1 = ${this.getRoot1} và x2 = ${this.getRoot2}`;
+    } else if (delta === 0) {
+      return `Phương trình có nghiệm kép x1 = x2 =  ${this.getRoot1}`;
     } else {
-      return 0;
+      return `Phương trình vô nghiệm`;
     }
   }
 }
-const quadraticEquation = new QuadraticEquation(6, -6, -6);
-console.log("delta", quadraticEquation.getDiscriminant());
-console.log("x1", quadraticEquation.getRoot1());
-console.log("x2", quadraticEquation.getRoot2());
+
+const test_1 = new QuadraticEquation(1, -10, -1);
+
+console.log(11, test_1.calculation);

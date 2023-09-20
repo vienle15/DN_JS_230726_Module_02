@@ -2,46 +2,59 @@ class Fan {
   readonly SLOW = 1;
   readonly MEDIUM = 2;
   readonly FAST = 3;
-
-  private speed: number;
-  private status: boolean;
-  private radius: number;
-  private color: string;
-
-  constructor(speed: number, status: boolean, color: string, radius: number) {
-    this.speed = speed;
+  constructor(
+    readonly color: string,
+    readonly radius: number,
+    private status: boolean = false,
+    private speed: number = 1
+  ) {
     this.status = status;
+    this.speed = speed;
     this.color = color;
     this.radius = radius;
   }
-  getSpeed(): number {
+
+  //   Phương thức
+
+  get getSpeed(): string {
     switch (this.speed) {
       case this.FAST:
         return "fast";
+      case this.MEDIUM:
+        return "medium";
+      default:
+        return "slow";
     }
   }
-  setSpeed(speed: number) {
+
+  set setSpeed(speed: number) {
     this.speed = speed;
   }
-  getStatus(): boolean {
-    return this.status;
+
+  get getStatus(): string {
+    return this.status ? "fan is on" : "fan is off";
   }
-  setStatus(status: boolean) {
+  set setStatus(status: boolean) {
     this.status = status;
   }
-  getColor(): string {
-    return this.color;
-  }
 
-  getRadius(): number {
-    return this.radius;
-  }
-  getInfo(speed: number, status: boolean, color: string, radius: number) {
+  get getInfo(): {
+    stauts: string;
+    radius: number;
+    color: string;
+    speed: string;
+  } {
     return {
-      speed: this.speed,
-      status: this.status,
+      stauts: this.getStatus,
       radius: this.radius,
       color: this.color,
+      speed: this.getSpeed,
     };
   }
 }
+
+const fan_1 = new Fan("yellow", 10, true, 3);
+const fan_2 = new Fan("blue", 10);
+
+console.log("Thông tin của quạt", fan_1.getInfo);
+console.log("Thông tin của quạt 2", fan_2.getInfo);

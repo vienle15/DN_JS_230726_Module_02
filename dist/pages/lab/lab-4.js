@@ -1,71 +1,71 @@
 "use strict";
 function handleCRUD() {
-    const selected = prompt("chọn C/R/U/D");
+    const selected = prompt("Chọn  C/R/U/D");
     const myClass = new ClassRoom();
     switch (selected) {
         case "C":
-            myClass.addStudent(new Student("A", "AAA", 20, false, "DN", 999999999));
+            myClass.addStudent(student_1);
             break;
         case "R":
             break;
         case "U":
+            const newData = { name: "B", id: "SV01" };
+            myClass.updateStudent(newData);
             break;
         case "D":
+            myClass.deleteStudent("SV01");
             break;
         default:
-            alert("chọn đúng C/R/U/D");
+            alert("Chọn đúng C/R/U/D");
+            break;
     }
 }
 class Student {
-    constructor(id, name, age, gender, address, phone) {
-        id = this.id;
-        name = this.name;
-        age = this.age;
-        gender = this.gender;
-        address = this.address;
-        phone = this.phone;
+    constructor(name, age, id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
     }
-    getInfo() {
+    get getInfo() {
         return {
-            id: this.id,
             name: this.name,
             age: this.age,
-            gender: this.gender,
-            address: this.address,
-            phone: this.phone,
+            id: this.id,
         };
-    }
-    get getId() {
-        return this.id;
-    }
-    get getName() {
-        return this.name;
     }
     set setName(name) {
         this.name = name;
     }
-    get getAge() {
-        return this.age;
-    }
-    get getGender() {
-        return this.gender;
-    }
-    get getAddress() {
-        return this.address;
-    }
-    set setAddress(address) {
-        this.address = address;
-    }
-    get getPhone() {
-        return this.phone;
-    }
-    set setPhone(phone) {
-        this.phone = phone;
+    set setAge(age) {
+        this.age = age;
     }
 }
-const student_1 = new Student("abcd1234", "Lele", 20, false, "DN", 999999999);
+const student_1 = new Student("A", 20, "SV01");
 class ClassRoom {
     constructor() {
         this.students = [];
     }
+    addStudent(student) {
+        this.students.push(student);
+    }
+    deleteStudent(id) {
+        const index = this.students.findIndex((student) => student.id === id);
+        this.students.splice(index, 1);
+    }
+    renderStudent() {
+        this.students.forEach((student) => {
+            console.log(student.getInfo);
+        });
+    }
+    updateStudent(newData) {
+        const newStudents = this.students.map((student) => {
+            if (newData.id == student.id) {
+                const test = Object.assign(Object.assign({}, student), newData);
+                console.log(111, test);
+            }
+            return student;
+        });
+        this.students = newStudents;
+    }
 }
+let number = ["", "2"];
