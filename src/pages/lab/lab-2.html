@@ -5,5 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <audio id="audio" src="/src/Tiếng Hóc Xương Lofi Cực Chill.mp3"></audio>
+    <button onclick="play()">PLAY</button>
+  </body>
+  <script>
+    let audio = document.getElementById("audio");
+    function play() {
+      audio.play();
+    }
+  </script>
 </html>

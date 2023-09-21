@@ -13,3 +13,12 @@ class VideoPlayer implements Playable {
     console.log("Đang phát Video ...");
   }
 }
+class Main {
+  main(): void {
+    const audioPlayer = new AudioPlayer();
+    const videoPlayer = new VideoPlayer();
+
+    audioPlayer.play();
+    videoPlayer.play();
+  }
+}
