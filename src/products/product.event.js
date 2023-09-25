@@ -1,5 +1,5 @@
-import { RenderUtil, _ADD_DATA } from "../utils/render.util";
-import { ProductService } from "./products.service";
+import { RenderUtil, _ADD_DATA } from "../utils/render.util.js";
+import { ProductService } from "./products.service.js";
 
 import Parent from "../utils/render.util";
 
@@ -20,3 +20,14 @@ window.onLoadProducts = function () {
     messageUtil.showSuccessMessage(ret.message); // redirect to x page
   } else messageUtil.showErrorMessage(ret.message);
 };
+class ProductEvent {
+  onLoadProducts() {}
+
+  addTocart(id) {}
+
+  buyNow(id) {}
+
+  viewProduct() {}
+
+  filterProduct(data) {}
+}
