@@ -1,0 +1,64 @@
+form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.submit,
+.clear {
+  width: 100px;
+  margin-right: 10px;
+}
+
+#nameInput,
+#addressInput,
+#state,
+#course,
+#game,
+#DOB {
+  margin-bottom: 20px;
+}
+body {
+  font-family: sans-serif;
+  color: #333;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+select {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.submit,
+.clear {
+  background-color: #000;
+  color: #fff;
+}
+.submit,
+.clear {
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+#nameIp,
+#addressIp,
+#courseSelect,
+#gameSelect,
+#dobSelect {
+  border-bottom: 1px solid #ccc;
+}
+
+@media screen and (max-width: 480px) {
+  form {
+    width: 100%;
+  }
+
+  .submit,
+  .clear {
+    width: 50%;
+    margin-right: 0;
+  }
+}
