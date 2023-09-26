@@ -43,3 +43,20 @@ function findMax(target) {
 }
 let aaa = findMax([12, 3312312, 12, 3121, 45, 66, 9999]);
 console.log("max là", aaa);
+class cloneArray {
+    constructor() {
+        this.value = [];
+    }
+    add(item) {
+        this.value.push(item);
+    }
+    sum() { }
+    getArray() {
+        return this.value;
+    }
+}
+const num_1 = new cloneArray();
+num_1.add(2);
+num_1.add(3);
+num_1.add(4);
+console.log(num_1.getArray());

@@ -77,3 +77,25 @@ function findMax<T>(target: T[]): T {
 }
 let aaa = findMax([12, 3312312, 12, 3121, 45, 66, 9999]);
 console.log("max là", aaa);
+
+// bài 6: tạo 1 class là cloneArray, tạo các phương thức add(),sum() cho cloneArray
+// add(): thêm phần tử vào mảng
+//  sum(): nếu phần tử mảng là number thì cộng vào, ngược lại thông báo không sum được
+
+class cloneArray {
+  private value: number[] = [];
+
+  add(item: number) {
+    this.value.push(item);
+  }
+  sum() {}
+
+  getArray() {
+    return this.value;
+  }
+}
+const num_1 = new cloneArray();
+num_1.add(2);
+num_1.add(3);
+num_1.add(4);
+console.log(num_1.getArray());

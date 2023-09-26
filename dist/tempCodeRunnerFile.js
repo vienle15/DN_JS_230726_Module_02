@@ -1,7 +1,17 @@
 "use strict";
-function forObj(object) {
-    for (const key in object) {
-        console.log(key + " " + "have value:" + object[key]);
+class cloneArray {
+    constructor() {
+        this.value = [];
+    }
+    add(item) {
+        this.value.push(item);
+    }
+    getArray() {
+        return this.value;
     }
 }
-forObj({ name: "Lê Tèo", age: 55 });
+const num_1 = new cloneArray();
+num_1.add(2);
+num_1.add(3);
+num_1.add(4);
+console.log(num_1.getArray());
